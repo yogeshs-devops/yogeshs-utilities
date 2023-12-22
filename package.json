@@ -1,0 +1,21 @@
+{
+  "name": "yogeshs-utilities",
+  "version": "1.1.0",
+  "description": "This is nodejs commonly used functions library written in typescript",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "common-utils",
+    "utilities",
+    "common",
+    "functions"
+  ],
+  "author": "Yogesh Sonawane (sonawane-yogesh)",
+  "license": "ISC",
+  "dependencies": {
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5"
+  }
+}
