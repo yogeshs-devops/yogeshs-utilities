@@ -2,7 +2,8 @@
   "name": "yogeshs-utilities",
   "version": "1.1.0",
   "description": "This is nodejs commonly used functions library written in typescript",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {},
   "keywords": [
     "common-utils",
