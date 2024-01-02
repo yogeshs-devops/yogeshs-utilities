@@ -1,17 +1,13 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const logger_1 = __importDefault(require("../utils/logger"));
+import logger from "../utils/logger";
+
 class PdfOperations {
-    open(unit8Array) {
+    open(unit8Array: any) {
         const pdfData = new Uint8Array(unit8Array.data);
         const blob = new Blob([pdfData], { type: 'application/pdf' });
         const url = URL.createObjectURL(blob);
         window.open(url);
     }
-    download(fileName, uint8Array) {
+    download(fileName: string, uint8Array: any) {
         const pdfBlob = new Blob([uint8Array], { type: 'application/pdf' });
         const blobUrl = URL.createObjectURL(pdfBlob);
         const link = document.createElement('a');
@@ -21,8 +17,8 @@ class PdfOperations {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(blobUrl);
-        logger_1.default.info("PDF file downloaded successfully");
+        logger.info("PDF file downloaded successfully", )
     }
 }
-exports.default = PdfOperations;
-//# sourceMappingURL=pdf.js.map
+
+export default PdfOperations;

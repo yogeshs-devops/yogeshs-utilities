@@ -1,33 +1,41 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const winston_1 = __importDefault(require("winston"));
-const logFormat = winston_1.default.format.combine(winston_1.default.format.timestamp(), winston_1.default.format.cli({ colors: { info: 'blue', error: 'red', warn: 'yellow', success: 'green' } }), winston_1.default.format.printf(info => {
-    const { timestamp, level, message } = info;
-    return `[${timestamp}] [${level}] ${message}`;
-}));
+const winston_1 = __importStar(require("winston"));
 const logger = winston_1.default.createLogger({
-    level: 'info',
-    format: logFormat,
-    transports: [
-        new winston_1.default.transports.Console(),
-        new winston_1.default.transports.File({ filename: 'app.log' })
-    ]
+    levels: {
+        fatal: 0,
+        error: 1,
+        warn: 2,
+        info: 3,
+        debug: 4,
+        trace: 5,
+    },
+    level: process.env.LOG_LEVEL || 'info',
+    format: winston_1.format.printf((info) => `${JSON.stringify(info, null, 2)}`),
+    transports: [new winston_1.default.transports.Console()],
 });
-exports.default = {
-    info: (message, data) => {
-        logger.log('info', { message, data });
-    },
-    warning: (message) => {
-        logger.warn(message);
-    },
-    error: (message) => {
-        logger.error(message);
-    },
-    success: (message, data) => {
-        logger.log('success', { message, data });
-    }
-};
+exports.default = logger;
 //# sourceMappingURL=logger.js.map
